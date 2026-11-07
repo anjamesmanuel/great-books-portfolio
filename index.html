@@ -78,9 +78,27 @@ blockquote.big cite{display:block;margin-top:1.2rem;font-family:var(--ui);font-s
 .tile:hover h4{color:var(--gold)}
 
 /* PROFILE */
-.profile{display:grid;grid-template-columns:300px 1fr;gap:4rem;align-items:start}
-@media(max-width:820px){.profile{grid-template-columns:1fr}}
-.portrait{position:sticky;top:100px}
+.profile{display:grid;grid-template-columns:300px 1fr;grid-template-areas:"photo head" "photo body";column-gap:4rem;align-items:start}
+.phead{grid-area:head}.pbody{grid-area:body;min-width:0}
+.portrait{grid-area:photo;position:sticky;top:100px}
+@media(max-width:900px){
+  .profile{grid-template-columns:1fr;grid-template-areas:"head" "photo" "body"}
+  .portrait{position:static;display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:center;margin:.4rem 0 2.6rem}
+  .idcard{margin-top:0}
+}
+@media(max-width:560px){
+  .wrap{padding:3rem 1.2rem 4rem}
+  .portrait{grid-template-columns:120px 1fr;gap:1.1rem;align-items:start}
+  .frame{padding:5px}
+  .idcard{font-size:.78rem}
+  .portrait .idcard div{flex-direction:column;justify-content:flex-start;gap:.05rem;padding:.5rem 0}
+  .portrait .idcard span:first-child{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+  .portrait .idcard span:last-child{text-align:left;font-size:.85rem}
+  .lead{font-size:1.08rem}
+  .chip{font-size:.72rem;padding:.35rem .7rem}
+  .callout{font-size:1.3rem}
+  .pbody .btn{display:block;text-align:center}
+}
 .frame{aspect-ratio:4/5;border:1px solid var(--gold);padding:8px}
 .frame .ph{width:100%;height:100%;background:rgba(239,233,221,.05);display:grid;place-items:center;text-align:center;overflow:hidden}
 .frame .ph img{width:100%;height:100%;object-fit:cover;display:block}
@@ -238,9 +256,11 @@ footer.site p{margin:.3rem 0}
           <div><span>Hometown</span><span>Calabanga, Camarines Sur</span></div>
         </div>
       </aside>
-      <div>
+      <div class="phead">
         <div class="eyebrow">Part I · Student Profile</div>
         <h2 class="sec">Hello, I'm James.</h2>
+      </div>
+      <div class="pbody">
         <p class="lead">I'm an Information Technology student at the University of Nueva Caceres in Naga City, and I come from Calabanga, Camarines Sur. Most of my days are spent writing code, mostly C# and .NET, designing databases, and fixing bugs that only appear at two in the morning.</p>
         <p>That makes me an unusual reader of Great Books. Before this course, most of what I read was technical documentation, programming forums, and the occasional story I found online when I needed a break from a screen full of errors. I was used to reading for <em>answers</em>: what does this function return, why does this query fail? Literature asked me to read for something else entirely: questions, ambiguity, and meaning.</p>
 
